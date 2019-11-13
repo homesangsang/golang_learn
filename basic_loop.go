@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strconv"
 )
 
@@ -18,7 +20,18 @@ func convertToBin(n int) string {
 	}
 	return result
 }
+func printFile(filename string) {
+	file, err := os.Open(filename)
+	if err != nil {
+		panic("err")
+	}
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		fmt.Println(scanner.Text())
+	}
+}
 func main() {
-	fmt.Println(10, convertToBin(10))
-	fmt.Printf("%b", 10)
+	//fmt.Println(10, convertToBin(10))
+	//fmt.Printf("%b", 10)
+	printFile("abc.txt")
 }
