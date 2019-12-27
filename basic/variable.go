@@ -6,21 +6,21 @@ var (
 	a, b, c = 3, true, "fff"
 )
 
-func variableZeroValue()  {
+func variableZeroValue() {
 	var a int
 	var b string
 	// \q可以打印出空字符串
 	fmt.Printf("%d, %q\n", a, b) // 0， ""
 }
 
-func variableInitialValue()  {
+func variableInitialValue() {
 	var a, b = 3, 4
 	var s = "abc"
 	fmt.Println(a, b)
 	fmt.Println(s)
 }
 
-func variableTypeDeduction()  {
+func variableTypeDeduction() {
 	var a, b, c = 1, true, "abc"
 	fmt.Println(a, b, c)
 }
