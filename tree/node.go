@@ -1,17 +1,17 @@
-package main
+package tree
 
 import "fmt"
 
-type treeNode struct {
-	value       int
-	left, right *treeNode
+type Node struct {
+	Value       int
+	Left, Right *Node
 }
 
 /**
 工厂函数
 */
-func createNode(value int) *treeNode {
-	return &treeNode{value: value}
+func CreateNode(value int) *Node {
+	return &Node{Value: value}
 }
 
 /**
@@ -19,54 +19,37 @@ func createNode(value int) *treeNode {
  * 接收者（node treeNode）
  * 调用时，使用 node.print()
  */
-func (node treeNode) print() {
-	fmt.Println(node.value)
+func (node Node) Print() {
+	fmt.Println(node.Value)
 }
 
 /**
  * 必须加*号，如果不加，则是值传递，无法更改引用的值
  */
-func (node *treeNode) setValue(value int) {
-	node.value = value
+func (node *Node) SetValue(value int) {
+	node.Value = value
 }
 
-func (node treeNode) getValue() int {
-	return node.value
+func (node Node) GetValue() int {
+	return node.Value
 }
 
 /**
  * 普通函数， 调用时使用 print(node)
  * 与上一个函数没有本质区别
  */
-func print(node treeNode) {
-	fmt.Println(node.value)
+func print(node Node) {
+	fmt.Println(node.Value)
 }
 
 /**
  * 中序遍历
  */
-func (node *treeNode) traverse() {
+func (node *Node) Traverse() {
 	if nil == node {
 		return
 	}
-	node.left.traverse()
-	node.print()
-	node.right.traverse()
-}
-
-func main() {
-	var root treeNode
-
-	root = treeNode{value: 3}
-	root.left = &treeNode{}             // 因为left是指针类型，所以必须取地址
-	root.right = &treeNode{5, nil, nil} // 初始化方式
-	root.right.left = new(treeNode)     // 初始化方式
-	root.right.right = createNode(2)    // 工厂函数方式
-
-	root.right.left.setValue(4)
-	root.right.left.print()
-
-	// 结构体的函数
-	root.print()
-	root.traverse()
+	node.Left.Traverse()
+	node.Print()
+	node.Right.Traverse()
 }
