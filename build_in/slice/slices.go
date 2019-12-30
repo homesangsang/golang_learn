@@ -62,4 +62,5 @@ func testSliceAndArray() {
 	fmt.Printf("s1: %v, len=%d, cap=%d\n", s1, len(s1), cap(s1))
 	fmt.Println(a)
 	s1[0] = 13
+
 }
