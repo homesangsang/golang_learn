@@ -11,6 +11,12 @@ type appHandler func(writer http.ResponseWriter, request *http.Request) error
 
 func errorWrapper(handler appHandler) func(writer http.ResponseWriter, request *http.Request) {
 	return func(writer http.ResponseWriter, request *http.Request) {
+		defer func() {
+			r := recover()
+			log.Error("panic: ", r)
+			http.Error(writer,
+				http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		}()
 		err := handler(writer, request)
 		if err != nil {
 			log.Error("error", err.Error())
@@ -29,7 +35,7 @@ func errorWrapper(handler appHandler) func(writer http.ResponseWriter, request *
 }
 
 func main() {
-	http.HandleFunc("/list/", errorWrapper(handler.FileReadHandler()))
+	http.HandleFunc("/", errorWrapper(handler.FileReadHandler()))
 
 	err := http.ListenAndServe(":8888", nil)
 	if err != nil {
