@@ -8,8 +8,8 @@ import (
 
 type StructDemo struct {
 	Id        string `json:"id"`
-	FirstName string `json:"firstName" bson:"first_name"`
-	LastName  string `json:"lastName" bson:"last_name"`
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
 }
 
 func structDemo() {
